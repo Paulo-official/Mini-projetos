@@ -137,7 +137,7 @@ class base(UserControl):
                                 ),
                                 OutlinedButton(
                                     text='Limpar tarefas completas'.upper(),
-                                    on_click=self.clear_clicked,
+                                    on_click=self.clear_clicked
                                 ),
                             ],
                         ),
@@ -155,19 +155,20 @@ class base(UserControl):
             self.update()
     
     def task_status_change(self, task):
-        self.update
+        self.update()
 
     def task_delete(self, task):
         self.task.controls.remove(task)
-        self.update
+        self.update()
 
     def tabs_change(self, e):
-        self.update
+        self.update()
 
-    def clear_clicked(self):
-        for task in self.task.controls[:]:
-            if task.completed:
+    def clear_clicked(self, task):
+        for task in self.task.controls[]:
+            if (task.complete):
                 self.task_delete(task)
+        self.update()
 
     def update(self):
         status = self.filter.tabs[self.filter.selected_index].text
@@ -175,8 +176,8 @@ class base(UserControl):
         for task in self.task.controls:
             task.visible = (
                 status == 'Todas tarefas'
-                or (status == 'Tarefas ativas' and task.completed == False)
-                or (status == 'Tarefas completas' and task.completed == True)
+                or (status == 'Tarefas ativas' and task.complete == False)
+                or (status == 'Tarefas completas' and task.complete == True)
             )
             if not task.complete:
                 count += 1
