@@ -165,7 +165,7 @@ class base(UserControl):
         self.update()
 
     def clear_clicked(self, task):
-        for task in self.task.controls[]:
+        for task in self.task.controls[:]:
             if (task.complete):
                 self.task_delete(task)
         self.update()
